@@ -19,10 +19,10 @@ def get_config():
     parser.add_argument("--n_images", type = int, default=10)
 
     # Generation
-    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=10)
     parser.add_argument("--batch_size", type=int, default=300)
-    parser.add_argument("--machine_name", type=str, default='Aengus')
-    parser.add_argument("--num_iters", type=int, default=3)
+    parser.add_argument("--machine_name", type=str, default='bigboy')
+    parser.add_argument("--num_iters", type=int, default=4)
 
     parser.add_argument("--model_id", type=str, default="CompVis/stable-diffusion-v1-4")
     parser.add_argument("--diffusion_batch_size", type=int, default=6)
