@@ -66,14 +66,25 @@ for iter in range(num_iters):
     # batch_size measures how many samples from a given animal-location prompt are created (should be multiple of 3)
     for animal in tqdm(animals):
         for location in locations:
+
+            prompt = f"{animal} {location}, highly detailed, with cinematic lighting, 4k resolution, beautiful composition, hyperrealistic"
+            anim_split = animal.split(' ')[0]
+            loc_split = location.split(' ')[-1]
+            save_label = f"/home/aengusl/Desktop/Projects/OOD_workshop/Stable_Diffusion_Generation/gen_images/{begin_exp_time}_{machine_name}/iter-{iter}/{loc_split}/{anim_split}"
+            os.makedirs(save_label, exist_ok=True)
+
+            print(' ')
+            print(f'Begin generating {anim_split}-{loc_split}')
+            print(f'Batch_size: {batch_size}')
+            print('Iteration:', iter)
+            now = datetime.now()
+            print('Time:', now)
+            print(' ')
+
             comb_idx = 0
             # Generate batch_size number of samples from the prompt
             while 3 * comb_idx < batch_size:
-                prompt = f"{animal} {location}, highly detailed, with cinematic lighting, 4k resolution, beautiful composition, hyperrealistic"
-                anim_split = animal.split(' ')[0]
-                loc_split = location.split(' ')[-1]
-                save_label = f"/home/aengusl/Desktop/Projects/OOD_workshop/Stable_Diffusion_Generation/gen_images/{begin_exp_time}_{machine_name}/iter-{iter}/{loc_split}/{anim_split}"
-                os.makedirs(save_label, exist_ok=True)
+                
                 # Three at a time
                 prompt_list = [prompt, prompt, prompt]
                 output = pipe(prompt_list)
