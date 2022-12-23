@@ -8,57 +8,45 @@ from datetime import datetime
 Get 512x512 data
 
 - downsize to new dim
-- put the data into 
--- unsorted folder
--- sorted folder
+- put the data into sorted folder
+
+^ do this for iter-0 data only, then do it for all data
 
 """
 
-object_save_labels = [
-    "car",
-    "motorcycle",
-    "truck",
-    "tractor",
-    "bus",
-    "bicycle",
+animals = [
+    'dragon',
+    'labrador',
+    'corgi',
+    'bulldog',
+    'dachsund',
+    'owl',
+    'eagle',
+    'penguin',
+    'goose',
+    'cat',
+    'lion',
+    'hamster',
+    'stallion',
+    'unicorn',
 ]
 
-location_save_labels = [
-    "grass",
-    "city",
-    "desert",
-    "snow",
+locations = [
+    'desert',
+    'snow',
+    'grass',
+    'water',
+    'cage',
+    'jungle',
 ]
 
-time_save_labels = [
-    "day",
-    "night",
-]
-
-
-
-directory_of_big_images = "Stable_Diffusion_Generation/gen_images/512_unsorted"
-
-# Count the number of files in the big image directory
-num_files_in_big_image_direct = 0
-for file in tqdm(os.listdir(directory_of_big_images)):
-    filename = os.fsdecode(file)
-    if filename.endswith(".png"):
-        labels = filename.split("_")
-        counter_ = int(labels[0])
-        print(labels[0])
-        if counter_ > num_files_in_big_image_direct:
-            num_files_in_big_image_direct = counter_
-
-print(f'num files in big image directory is {num_files_in_big_image_direct}')
-
+# Establish roots, and create target directories
+root_512_images = "/home/aengusl/Desktop/Projects/OOD_workshop/Stable_Diffusion_Generation/gen_images/15-Dec_16-23-21_bigboy/iter-0"
 new_dim = 100
-
-begin_exp_time_path = "{:%d-%b_%H-%M}".format(datetime.now())
-root_small_image_sorted = f"gen_images/100_sorted_{begin_exp_time_path}"
+exp_time = "{:%d-%b_%H-%M}".format(datetime.now())
+root_100_images = f"/home/aengusl/Desktop/Projects/OOD_workshop/Stable_Diffusion_Generation/gen_images/iter-0_100_images"
 os.makedirs(root_small_image_sorted, exist_ok=True)
-root_small_image_unsorted = f"gen_images/100_unsorted_{begin_exp_time_path}"
-os.makedirs(root_small_image_unsorted, exist_ok=True)
+
 
 # make directories for sorted folders
 for time in time_save_labels:
@@ -100,3 +88,17 @@ for file in tqdm(os.listdir(directory_of_big_images)):
         # start saving 
         small_image.save(small_image_unsorted)
         small_image.save(small_image_sorted)
+
+
+# # Count the number of files in the big image directory
+# num_files_in_big_image_direct = 0
+# for file in tqdm(os.listdir(directory_of_big_images)):
+#     filename = os.fsdecode(file)
+#     if filename.endswith(".png"):
+#         labels = filename.split("_")
+#         counter_ = int(labels[0])
+#         print(labels[0])
+#         if counter_ > num_files_in_big_image_direct:
+#             num_files_in_big_image_direct = counter_
+
+# print(f'num files in big image directory is {num_files_in_big_image_direct}')
